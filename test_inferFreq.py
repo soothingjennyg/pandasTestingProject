@@ -38,6 +38,12 @@ class TestInferFreq(unittest.TestCase):
                '2018-02-19 09:36:39',
                '2018-02-20 04:48:52', '2018-02-21 00:01:05'])
 
+        #interval (timedeltaIndex) -> 27H
+        self.idx4 = pd.TimedeltaIndex(data =['1 days 03:00:00', '2 days 06:00:00', '3 days 09:00:00'])
+
+        #interval: not regularly (timedeltaIndex)
+        self.err4 = pd.TimedeltaIndex(data =['1 days 03:00:00', '2 days 05:42:42', '3 days 09:00:00'])
+
 
 
     def test_inferFreq(self):
@@ -59,6 +65,12 @@ class TestInferFreq(unittest.TestCase):
 
         freq3Err = pd.infer_freq(self.err3)
         self.assertIsNone(freq3Err)
+
+        freq4 = pd.infer_freq(self.idx4)
+        self.assertEqual(freq4, "27H")
+        
+        freq4Err = pd.infer_freq(self.err4)
+        self.assertIsNone(freq4Err)
 
 
 if __name__ == '__main__':
