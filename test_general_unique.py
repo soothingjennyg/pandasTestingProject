@@ -21,7 +21,7 @@ class TestUnique(unittest.TestCase):
         self.sequence1 = [1, 2, 3]
         self.sequence2 = [1, 2, 3, 3]
         self.sequence3 = []
-
+        self.sequence4 = [0]*1000000 + [1]
     
     def test_unique_blackbox(self):
         #basic uniqueness test given documentation
@@ -31,6 +31,8 @@ class TestUnique(unittest.TestCase):
         self.assertTrue(all_true(sequence2_unique == [1, 2, 3]))
         sequence3_unique = pd.unique(self.sequence3) 
         self.assertTrue(all_true(sequence3_unique == []))
+        sequence3_unique = pd.unique(self.sequence4) 
+        self.assertTrue(all_true(sequence3_unique == [0,1]))
 
 
 
