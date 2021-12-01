@@ -6,7 +6,6 @@ import unittest
 def all_true(arr):
     '''Returns True if all items in array is True.
         Otherwise return False'''
-    state = True
     for item in arr:
         if item == False:
             return False
