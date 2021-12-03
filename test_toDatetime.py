@@ -5,7 +5,15 @@ import unittest
 class TestToDateTime(unittest.TestCase):
     """
     Test the pandas.to_datetime function.
-    This test focuses on the parameters 'arg', 'dayfirst' and 'format'.
+
+    to_datetime reads a given argument 'arg' (that should indicate a specific date)
+    and returns a numpy datetime object with the corresponding date.
+    'arg' can have various formats (strings, lists, data frames etc.) and can also contain
+    dates in a user-defined format. The user is then responsible to pass
+    a matching 'format' parameter so that the date that is given by 'arg' is well-defined.
+    The user has to set the 'dayfirst' parameter to true (default = false) if the date contains
+    the day in the beginning (default: year in the beginning).
+    This test focuses only on these three parameters 'arg', 'dayfirst' and 'format'.
     The other parameters are not changed and therefore tested with their default values.
     This decision comes from the fact that we suspect that some parameters are most often
     used with default value in practice. In addition, the to_datetime function has
