@@ -11,3 +11,12 @@ class TestSeriesSum(unittest.TestCase):
         self.assertEqual(self.series1.sum(),0)
         self.assertEqual(self.series2.sum(),10)
         self.assertEqual(self.series3.sum(),20)
+        
+        
+        
+        
+if __name__ == '__main__':
+    unittest.main()
+        
+        
+        
