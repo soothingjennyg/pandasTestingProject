@@ -39,6 +39,11 @@ class TestSeriesSub(unittest.TestCase):
     def test_series_sub_different_length(self):
         self.assertTrue(self.series5a.sub(self.series5b).equals(self.series5c))
         self.assertTrue(self.series7a.sub(self.series7b).equals(self.series7c)
+                        
+if __name__ == '__main__':
+    unittest.main()                    
+                        
+                        
 
 
 
