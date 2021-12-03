@@ -12,3 +12,10 @@ class TestSeriesAt(unittest.TestCase):
         self.assertEqual(self.series2.at["cow"], 8)
         self.assertEqual(self.series3.at[3], 10)
         self.assertEqual(self.series3.at[4], 5)
+  
+if __name__ == '__main__':
+    unittest.main()
+
+        
+        
+        
