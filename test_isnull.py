@@ -27,14 +27,22 @@ class test_isnull(unittest.TestCase):
         self.testNone = None
         self.testString = 'aword is a word'
         self.testNAN = "NaN"
-
+        self.indexDateTime = pd.DatetimeIndex(["2017-07-05", "2017-07-06", None,
+                                  "2017-07-08"])
     def test_isnull_blackbox(self):
-
+        # Test for None to be true
         self.assertEqual(pd.isnull(self.testNone), True)
+        # Test for a string to be false
         self.assertEqual(pd.isnull(self.testString), False)
+        # Test for NAN to be false
         self.assertEqual(pd.isnull(self.testNAN), False)
+        #Test for an empty string to be false
         self.assertEqual(pd.isnull(self.emptyString), False)
-
+        #Test for an array of dates with a None value to be [F,F,T,F]
+        self.assertEqual(pd.isnull(self.indexDateTime[0]), False)
+        self.assertEqual(pd.isnull(self.indexDateTime[1]), False)
+        self.assertEqual(pd.isnull(self.indexDateTime[2]), True)
+        self.assertEqual(pd.isnull(self.indexDateTime[3]), False)
 
 
 if __name__ == '__main__':
