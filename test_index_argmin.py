@@ -6,6 +6,18 @@ import numpy as np
 # undefined, null, not null, 0, max, float
 # array to series conversion
 # series to array conversion
+"""
+Test the pandas.Index.argmin(axis=None, skipna=True, *args, **kwargs) function.
+
+isnull returns the integer position of the smallest value in a series.  If there are more than one 
+with a minimum, the first position is returned (https://pandas.pydata.org/docs/reference/api/pandas.Index.argmin.html#pandas.Index.argmin)
+
+Their are four parameters for this function.
+Axis is a dummy argument to match Series.  Skipna is a boolean value that defaults to true.  When it is true, null values
+are excluded.  *args and **kwargs are arguments and keywords for use with NumPy.   
+
+
+"""
 
 
 #Index.argmin(axis=None, skipna=True, *args, **kwargs)
