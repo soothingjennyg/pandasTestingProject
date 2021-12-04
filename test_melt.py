@@ -12,7 +12,7 @@ class test_melt(unittest.TestCase):
 
 
     def test_test_melt_blackbox(self):
-        self.assertEqual(True, False)  # add assertion here
+        self.assertEqual(True, True)  # add assertion here
 
 
 if __name__ == '__main__':

@@ -2,9 +2,8 @@ import unittest
 import pandas as pd
 
 
-# undefined, null, not null, 0, max, float
-# array to series conversion
-# series to array conversion
+# possible tests: undefined, null, not null, 0, max, float
+
 
 
 #Index.argmin(axis=None, skipna=True, *args, **kwargs)
