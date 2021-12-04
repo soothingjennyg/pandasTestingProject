@@ -17,7 +17,7 @@ class TestIndexAny(unittest.TestCase):
         self.assertTrue(self.series3.any() == False)
         self.assertTrue(self.series4.any() == False)
         self.assertTrue(self.series5.any() == True)
-         self.assertTrue(self.series6.any() == True)
+        self.assertTrue(self.series6.any() == True)
 
 
 if __name__ == '__main__':
