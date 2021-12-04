@@ -1,5 +1,10 @@
 import unittest
 import pandas as pd
+import sys
+if sys.version_info[0] < 3:
+    from StringIO import StringIO
+else:
+    from io import StringIO
 #Return reshaped DataFrame organized by given index / column values.
 
 #Reshape data (produce a “pivot” table) based on column values. Uses unique values from specified index / columns
@@ -37,11 +42,52 @@ class test_pivot(unittest.TestCase):
         self.testNAN = "NaN"
         self.emptyDataFrame = pd.DataFrame(self.emptyArray)
 
+        self.df = pd.DataFrame({'foo': ['one', 'one', 'one', 'two', 'two', 'two'],
+                                'bar': ['A', 'B', 'C', 'A', 'B', 'C'],
+                                'baz': [1, 2, 3, 4, 5, 6],
+                                'zoo': ['x', 'y', 'z', 'q', 'w', 't']})
+
+        self.pivotData = pd.DataFrame({
+            'A': [1,4],
+            'B': [2,5],
+            'C': [3,6]
+        },index=['one', 'two'], columns=['A', 'B', 'C'])
 
     def test_pivot_blackbox(self):
         self.assertEqual(True, True)  # add assertion here
+        self.df
+        self.pivotData
 
-        #self.assertEqual(self.emptyDataFrame, pd.pivot(self.emptyDataFrame))  # add assertion here
+        p = self.df.pivot(index='foo', columns='bar', values='baz')
+        """
+        print()
+        print(p.to_string())
+        print()
+
+        print(p.index)
+        print()
+
+        print(p.columns)
+        print()
+        print(p.values)
+        print()
+        """
+        self.pivotData.index.name = 'foo'
+        self.pivotData.columns.name = 'bar'
+        """
+        print(self.pivotData.to_string())
+        print()
+
+        print(self.pivotData.index)
+        print()
+        print(self.pivotData.columns)
+        print()
+        print(self.pivotData.values)
+        print()
+"""
+        #self.assertTrue(self.t2.to_string(index=False) == p.to_string())
+        self.assertTrue(p.equals(self.pivotData))
+
 
 
 if __name__ == '__main__':
