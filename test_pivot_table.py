@@ -1,3 +1,5 @@
+#THIS TEST NEEDS TO BE DELETED FROM GIT
+
 import unittest
 import pandas as pd
 #To test: empty, 
@@ -32,6 +34,10 @@ class test_pivot_table(unittest.TestCase):
         self.testNone = None
         self.testString = 'aword is a word'
         self.testNAN = "NaN"
+
+        df = pd.read_excel('https://github.com/datagy/pivot_table_pandas/raw/master/sample_pivot.xlsx',
+                       parse_dates=['Date'])
+        print(df.head())
 
     def test_pivot_table_blackbox(self):
 
