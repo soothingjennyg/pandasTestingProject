@@ -34,16 +34,32 @@ This function returns an unpivoted DataFrame.
 
 class test_melt(unittest.TestCase):
     def setUp(self):
-        self.seriesTest = [1, 2, 3, 4, 5]
         self.emptyArray = []
-        self.emptyString = ""
-        self.testNone = None
-        self.testString = 'aword is a word'
-        self.testNAN = "NaN"
+        self.emptyDataFrame = pd.DataFrame(self.emptyArray)
+        self.emptyDataFrame2 = pd.DataFrame()
+
+        self.nameArray = ["Alex", "Bob", "Henry", "Charles", "David"]
+        self.nameArrayDataFrame = pd.DataFrame({'Name': self.nameArray})
+
+        self.dfTest = pd.DataFrame({'A': {0: 'a', 1: 'b', 2: 'c'},
+                           'B': {0: 1, 1: 3, 2: 5},
+                           'C': {0: 2, 1: 4, 2: 6}})
+
+        self.dfMelt = pd.DataFrame({'A': {0: 'a', 1: 'b', 2: 'c'},
+                               'variable': {0: 'B', 1: 'B', 2: 'B'},
+                               'value': {0: 1, 1: 3, 2: 5}})
+
+        self.nameArrayDataFrameMelt = pd.DataFrame({
+                               'variable': {0: 'Name', 1: 'Name', 2: 'Name', 3: 'Name', 4: 'Name'},
+                               'value': {0: 'Alex', 1: 'Bob', 2: 'Henry', 3: 'Charles', 4: 'David'}})
+
 
 
     def test_test_melt_blackbox(self):
-        self.assertEqual(True, True)  # add assertion here
+        self.assertTrue(self.dfMelt.equals(pd.melt(self.dfTest, id_vars=['A'], value_vars=['B'])))
+        self.assertTrue(pd.melt(self.emptyDataFrame).empty)
+        self.assertTrue(self.nameArrayDataFrameMelt.equals(pd.melt(self.nameArrayDataFrame)))
+
 
 
 if __name__ == '__main__':
