@@ -3,8 +3,6 @@ import unittest
 import pandas as pd
 import sys
 
-# undefined, null, not null, 0, max, float
-
 """
 Test the pandas.Index.argmax(axis=None, skipna=True, *args, **kwargs) function.
 
@@ -20,7 +18,6 @@ are excluded.  *args and **kwargs are arguments and keywords for use with NumPy.
 
 
 #Index.argmin(axis=None, skipna=True, *args, **kwargs)
-# empty array, empty string
 class test_argmax(unittest.TestCase):
 
     def setUp(self):

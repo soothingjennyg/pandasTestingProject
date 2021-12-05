@@ -2,7 +2,6 @@ import unittest
 import pandas as pd
 
 
-# possible tests: undefined, null, not null, 0, max, float
 """
 Test the pandas.isnull function.
 
@@ -18,7 +17,6 @@ The only parameter for this function is the object being tested.
 
 
 #Index.argmin(axis=None, skipna=True, *args, **kwargs)
-# empty array, empty string
 class test_isnull(unittest.TestCase):
     def setUp(self):
         self.seriesTest = [1, 2, 3, 4, 5]

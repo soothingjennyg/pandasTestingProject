@@ -38,7 +38,6 @@ class test_pivot(unittest.TestCase):
         self.emptyArray = []
         self.emptyString = ""
         self.testNone = None
-        self.testString = 'aword is a word'
         self.testNAN = "NaN"
         self.emptyDataFrame = pd.DataFrame(self.emptyArray)
         self.nameArrayDataFrame = pd.DataFrame({'Name': self.nameArray})
@@ -60,48 +59,11 @@ class test_pivot(unittest.TestCase):
 
 
     def test_pivot_blackbox(self):
-       # self.df
-       # self.pivotDataTestOne
 
         #Test for correct data on two data columns
         testOne = self.df.pivot(index='foo', columns='bar', values='baz')
         testTwo = self.df.pivot(index='foo', columns='bar', values='zoo')
 
-       # print(self.nameArrayDataFrame.to_string())
-
-       # print(self.nameArrayDataFrame.columns)
-        #print(self.nameArrayDataFrame.index)
-
-        #print(self.nameArrayDataFrame.values)
-
-        #testThree = self.nameArrayDataFrame.pivot(columns='Name', index='Alex')
-        #print(testThree)
-
-        """
-        print()
-        print(self.df.to_string())
-        print()
-
-        print(self.df.index)
-        print()
-
-        print(self.df.columns)
-        print()
-        print(self.df.values)
-        print()
-        """
-
-        """
-        print(self.pivotData.to_string())
-        print()
-
-        print(self.pivotData.index)
-        print()
-        print(self.pivotData.columns)
-        print()
-        print(self.pivotData.values)
-        print()
-"""
         #self.assertTrue(self.t2.to_string(index=False) == p.to_string())
         self.assertTrue(testOne.equals(self.pivotDataTestOne))
         self.assertTrue(testTwo.equals(self.pivotDataTestTwo))
