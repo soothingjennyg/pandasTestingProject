@@ -12,12 +12,40 @@ class TestSnap(unittest.TestCase):
     TODO: Comment
     """
     def setUp(self):
-        pass
+        self.index1 = pd.DatetimeIndex(["2020-09-23", "2020-09-26", "2020-09-29"])
+        self.index1W = pd.DatetimeIndex(['2020-09-20', '2020-09-27', '2020-09-27'])
+
+        self.index2 = pd.DatetimeIndex([])
+
+        self.index3 = pd.DatetimeIndex(["2020-09-20"])
 
     def test_Snap(self):
-        index = pd.DatetimeIndex([0.1,0.5,0.4], freq="W")
-        snap(index)
+        #not 100% statements:
+        sn = snap(self.index1, freq="D")
+        self.assertTrue(sn.equals(self.index1))
 
+
+        #100 % statements:
+        sn = snap(self.index1, freq="W")
+        self.assertTrue(sn.equals(self.index1W))
+
+
+        #edge coverage
+        sn = snap(self.index1, freq="D")
+        self.assertTrue(sn.equals(self.index1))
+        sn = snap(self.index1, freq="W")
+        self.assertTrue(sn.equals(self.index1W))
+
+
+        #loop 0, 1, multiple times
+        sn = snap(self.index2, freq="D")
+        self.assertTrue(sn.equals(self.index2))
+
+        sn = snap(self.index3, freq="W")
+        self.assertTrue(sn.equals(self.index3))
+
+        sn = snap(self.index1, freq="W")
+        self.assertTrue(sn.equals(self.index1W))
 
 
 
