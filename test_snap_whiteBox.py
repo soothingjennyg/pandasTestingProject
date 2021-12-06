@@ -50,20 +50,28 @@ class TestSnap(unittest.TestCase):
 
 
 def snap(self, freq="S") -> DatetimeIndex:
+    print("\nNode 0")
+    print("Node 1")
     freq = to_offset(freq)
 
     snapped = np.empty(len(self), dtype=DT64NS_DTYPE)
 
     for i, v in enumerate(self):
+        print("Node 2")
         s = v
         if not freq.is_on_offset(s):
+            print("Node 4")
             t0 = freq.rollback(s)
             t1 = freq.rollforward(s)
             if abs(s - t0) < abs(t1 - s):
+                print("Node 5")
                 s = t0
             else:
+                print("Node 6")
                 s = t1
+        print("Node 7")
         snapped[i] = s
 
+    print("Node 3\n")
     dta = DatetimeArray(snapped, dtype=self.dtype)
     return DatetimeIndex._simple_new(dta, name=self.name)
