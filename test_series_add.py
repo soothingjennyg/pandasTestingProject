@@ -4,6 +4,14 @@ import unittest
 
 
 class TestSeriesAdd(unittest.TestCase):
+    """
+    Test the pandas.series.add function.
+
+    add() will add the elements of the corresponding indices from the Series it's called on and the Series passed as
+    'other' argument.
+    This test focuses only on the parameter 'other', and the Series it's called on.
+    The other parameters are not set and therefore tested with their default values.
+    """
     def setUp(self):
         # regular addition
         self.series1a = pd.Series([0, 1, 2, 3])
