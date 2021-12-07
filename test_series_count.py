@@ -20,18 +20,23 @@ The series.count function that we are testing does:
     int or Series (if level specified)
         Number of non-null values in the Series.
 
-This means that series will count number of things in a series, except for NaN:s. In the case of picking a level, it will count how many values each index holds.
-so if you have an index [1,2,3] for values [a,b,c], it will return :
+This means that series will count number of things in a series, except for NaN:s. 
+
+If the series have multindex (several indexes), you have to pick a level.
+A level is a thing used when you have multiple indexes. Say you have two indexes for each entry , 
+then level 0 is the first index and level 1 is the second index. Given a multiindex series, count will count
+how many values each value in the chosen index holds.
+If you have an index [1,2,3] for values [a,b,c], it will return :
 1    1
 2    1
 3    1
 
-And if the index for some reason is [1,1,2,3] for [a,b,c,d] it will return:
+If the index for some reason is [1,1,2,3] for [a,b,c,d] it will return:
 1    2
 2    1
-3    1
+3    1 
 
-And finally if one of the values is NaN, index [1,1,2,3] for values [a,b,c,NaN], the NaN isn't counted:
+Finally if one of the values is NaN, index [1,1,2,3] for values [a,b,c,NaN], the NaN isn't counted:
 
 1    2
 2    1
@@ -39,20 +44,18 @@ And finally if one of the values is NaN, index [1,1,2,3] for values [a,b,c,NaN],
 
 ##############################################
 Analysis with interface based approach:
-The parameters the function takes is a series and maybe a level. A level is a thing used when you have multiple indexes. Say you have
-two indexes for each entry for instance, then level 0 is the first index and level 1 is the second index.
+The parameters the function takes is a series and maybe a level. 
 
 So the input domain can be: 
 "A series and no level" 
 "A series with a level"
 
-So, the thing it returns is the number of values, it is similar to length in that way, but it will ignore NaN:s.
 
-A note is that you get a warning when you add the levels parameter becaues it will be removed in a future version. In the futer you will have to perform a group by 
-before you do the count, like this:
+A note is that you get a warning when you add the levels parameter becaues it will be removed in a future version. 
+In the futer you will have to perform a group by before you do the count, like this:
 s.groupby(level=1).count()
 
-instead of
+instead of:
 pandas.Series.count(s,1)
 
 This is a good choice I think.
@@ -113,10 +116,6 @@ class TestSeriesCount(unittest.TestCase):
             np.array([1,2,3]),
             np.array([15,16,17]),
         ]
-
-
-
-
     
     def test_series_count_blackbox(self):
         "A series and no level" 
@@ -153,11 +152,6 @@ class TestSeriesCount(unittest.TestCase):
 
 
         self.assertTrue(all_true_index((pd.Series.count(counted_level,0) == compare)))
-
-
-
-
-
 
 
 if __name__ == '__main__':
