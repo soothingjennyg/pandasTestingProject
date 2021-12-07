@@ -3,6 +3,14 @@ import pandas as pd
 
 
 class TestMerge(unittest.TestCase):
+    """
+    Test the pandas.merge function.
+
+    merge() reads performs and returns the result of the counterpart of SQL JOIN with two DataFrames.
+    The argument 'left' is a DataFrame and 'right' is a DataFrame or a named Series.
+    This test focuses only on the parameters 'left' and 'right'.
+    The other parameters are not set and therefore tested with their default values.
+    """
     def setUp(self):
         # one mutual column to merge
         self.df_1a = pd.DataFrame({'a': [1, 2, 3], 'b': [4, 5, 6], 'c': [7, 8, 9]})

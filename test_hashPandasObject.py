@@ -5,13 +5,18 @@ import unittest
 
 class TestHashPandasObject(unittest.TestCase):
     """
-    Test the function for hashing of a pandas object (e.g. index or data frames)
+    Test the function for hashing of a pandas object (e.g. index or data frame)
     All parameters (except of the hashed object) are set to their default value (perhaps
     also the usual case in practice).
+    For each value contained in the passed object, the function returns an unsigned integer ("hash").
 
-    We have the following requirements on a hash (that we check in this test):
-    - It should be deterministic i.e. same hash for same object
-    - It should be different for different objects
+    We have the following requirements on a returned hash (that we check in this test):
+    - It should be deterministic i.e. same hash for same value
+    - It should be different for different values
+
+    Because these requirements become more significant for index/frames with more values, we implemented
+    some helper functions for the automatic creation and comparison of large data structures
+    that are passed to the hash_pandas_object function
     """
 
     def setUp(self):
@@ -64,25 +69,42 @@ class TestHashPandasObject(unittest.TestCase):
 #HELPER FUNCTIONS FOR COMPARISON OF HASHES :
 
 def someHashEqual(h1, h2):
+    """
+    return true iff the intersection of the given hash values h1 and h2 is not empty
+    """
     s1 = toSet(h1)
     s2 = toSet(h2)
     return len(set.intersection(s1, s2)) > 0
 
 
 def allHashEqual(h1, h2):
+    """
+    return true iff the set of the given hash values contained in h1 is equal to those in h2
+    """
     s1 = toSet(h1)
     s2 = toSet(h2)
     return (len(s1) == len(s2)) and (s1 == set.intersection(s1, s2))
 
 def toSet(hashes):
+    """
+    converts the hashes (iterable) to a corresponding set of hashes
+    """
     s = set()
     for val in hashes:
         s.add(val)
     return s
 
+
+
 #HELPER FUNCTION FOR CREATION OF (BIG) INDEX:
 
 def createRandomIdx(length, seed):
+    """
+    :param length: length of the index
+    :param seed: random seed that is used for random initialisation of the index.
+    Different seeds will lead to different values in the index (ignoring uncertain cases here)
+    :return: the random index of length 'length'
+    """
     random.seed(seed)
     arr = random.rand(length)
     return pd.Index(arr)
