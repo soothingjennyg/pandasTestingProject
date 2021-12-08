@@ -5,10 +5,13 @@ import pandas as pd
 """
 Test the pandas.isnull function.
 
-isnull reads a given object and returns a bool or
-array of bools that identify if the object is missing values.  This includes None, NaN in object arrays and NaT in datetimelike.
-If the object is null, it will return true, or true for 
-the items in the array that are null, false for non-null items.
+Pandas isnull function reads a given object which can be an array or a scalar and returns a boolean or an array of 
+booleans that identifies if the object is missing values.  This includes None, NaN in object arrays and NaT in 
+datetimelike.  If the object is null it will return true, or true for the items in the array that are null, 
+false for non-null items.  The only parameter for this function is the object being tested.
+
+This function was tested with an array with no 
+
 
 The object can be an array or scalar. 
 
@@ -16,7 +19,6 @@ The only parameter for this function is the object being tested.
 """
 
 
-#Index.argmin(axis=None, skipna=True, *args, **kwargs)
 class test_isnull(unittest.TestCase):
     def setUp(self):
         self.seriesTest = [1, 2, 3, 4, 5]
