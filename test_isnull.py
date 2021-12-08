@@ -10,7 +10,7 @@ booleans that identifies if the object is missing values.  This includes None, N
 datetimelike.  If the object is null it will return true, or true for the items in the array that are null, 
 false for non-null items.  The only parameter for this function is the object being tested.
 
-This function was tested with an array with no 
+This function was tested with an empty array, an array with no Null values, an array with a None value, NaN and a string. 
 
 
 The object can be an array or scalar. 
