@@ -148,9 +148,14 @@ class TestSeriesCount(unittest.TestCase):
 
         #this one should count index 16 twice, and give us [1,2]
         counted_sequence9  = pd.Series.count(self.sequence8,1).values.tolist()
-        
-
         self.assertEqual(counted_sequence9, [1,2])
+
+        #this one should count index 16 twice, and give us [1,2]
+        counted_sequence9  = pd.Series.count(self.sequence8,1).values.tolist()
+        self.assertEqual(counted_sequence9, [1,2])
+
+
+
 
 if __name__ == '__main__':
     unittest.main()

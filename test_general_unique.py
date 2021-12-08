@@ -1,6 +1,7 @@
 import pandas as pd
 import inspect
 import unittest
+import numpy as np
 
 
 def all_true(arr):
@@ -26,6 +27,8 @@ class TestUnique(unittest.TestCase):
     def test_unique_blackbox(self):
         #basic uniqueness test given documentation
         sequence1_unique = pd.unique(self.sequence1) 
+        
+
         self.assertTrue(all_true(sequence1_unique == [1, 2, 3]))
         sequence2_unique = pd.unique(self.sequence2) 
         self.assertTrue(all_true(sequence2_unique == [1, 2, 3]))
