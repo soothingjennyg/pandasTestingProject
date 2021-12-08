@@ -2,6 +2,10 @@ import pandas as pd
 import unittest
 
 class TestIndexSize(unittest.TestCase):
+    """
+    Test the pandas.Indexsize property
+    The size returns the number of elements in the Index.
+    """
     def setUp(self):
         self.Index1 = pd.Index(['Apple','Banana'])
         self.Index2 = pd.Index(['dog','cat','pecock'])
