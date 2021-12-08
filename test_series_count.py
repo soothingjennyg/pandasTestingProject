@@ -64,37 +64,6 @@ This is a good choice I think.
 '''
 
 
-def all_true(arr):
-    '''Returns True if all items in array is True.
-        Otherwise return False'''
-    state = True
-    for item in arr:
-        if item == False:
-            return False
-    return True
-
-def all_true_index(arr):
-    #need to fix this one to be more general
-    '''Returns True if all items in a series with index all is True.
-        Otherwise return False
-
-        input will be in the form:
-        1    True
-        2    True
-        3    True
-        dtype: bool
-
-        This will only work if the index i is int
-        '''
-
-    state = True
-    for i in range(1,len(arr)):
-        #print("arr0: " + str(arr[0]))
-        if arr[i] == False:
-            return False
-    return True
-
-
 
 class TestSeriesCount(unittest.TestCase):
     '''Functions for testing the count in pandas series functions. Count returns elements in a series, 

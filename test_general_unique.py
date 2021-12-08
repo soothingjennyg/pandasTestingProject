@@ -3,6 +3,19 @@ import inspect
 import unittest
 import numpy as np
 
+'''
+Parameters: values1d: array-like
+
+Returns:
+numpy.ndarray or ExtensionArray
+The return can be:
+    Index : when the input is an Index
+    Categorical : when the input is a Categorical dtype
+    ndarray : when the input is a Series/ndarray
+    Return numpy.ndarray or ExtensionArray.'''
+
+
+
 
 def all_true(arr):
     '''Returns True if all items in array is True.

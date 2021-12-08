@@ -2,9 +2,13 @@ import pandas as pd
 import numpy as np
 import unittest
 
+''' Interchange axes and swap values axes appropriately.
 
+    So what we are testing here is if the swap of columns and rows in a dataframe is correct. Rows become columns and columns become rows.
 
+    For testcases we are doing four. The empty table, table with one entry, a small symmetric table and a bigger not symmetric table.
 
+'''
 def all_true(arr):
     '''Returns True if all items in array is True.
         Otherwise return False'''
@@ -31,19 +35,27 @@ class TestUnique(unittest.TestCase):
                                  "A2":[11, 5, 21, 5], 
                                  "A3":[7, 32, 23, 3], 
                                  "A4":[8, 4, 7, 8], 
-                                 "A5":[5, 6, 9, 5]},   
+                                 "A5":[5, 6, 9, 6]},   
                    index =["A", "B", "C", "D"])
+
+        self.df3 = pd.DataFrame({"A":[0]}, 
+                        index =["A"])
+        print(self.df3)
+
 
 
     def test_unique_blackbox(self):
-        #swapping axes
+
         df1_swapped = self.df1.swapaxes(axis1="index", axis2="columns")
         # making array that is only True if all equal
         bool_arr = ((df1_swapped == self.df2).eq(True).all())
-        print(bool_arr)
-
         self.assertTrue(all_true(bool_arr.values.tolist()))
 
+        
+        df3_swapped = self.df3.swapaxes(axis1="index", axis2="columns")
+        # making array that is only True if all equal
+        bool_arr = ((df3_swapped == self.df3).eq(True).all())
+        self.assertTrue(all_true(bool_arr.values.tolist()))
 
 
 
