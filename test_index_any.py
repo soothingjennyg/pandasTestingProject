@@ -2,6 +2,11 @@ import pandas as pd
 import unittest
 
 class TestIndexAny(unittest.TestCase):
+    """
+    Test the pandas.Index.any function
+    Index.any  With in the Index array if atleast one value is true it returns True otherwise it resturns False 
+    """
+    
     def setUp(self):
         self.series1 = pd.Index([3, 4, 6])
         self.series2 = pd.Index([1, 1, 2, 0])

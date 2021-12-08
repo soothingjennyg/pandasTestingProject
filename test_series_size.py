@@ -3,6 +3,11 @@ import unittest
 
 
 class TestSeriesSize(unittest.TestCase):
+    """
+    Test the pandas.size property.
+
+    size returns the number of elements in the Series.
+    """
     def setUp(self):
         self.series1 = pd.Series(1)
         self.series2 = pd.Series([1, 2, 3])

@@ -20,18 +20,23 @@ The series.count function that we are testing does:
     int or Series (if level specified)
         Number of non-null values in the Series.
 
-This means that series will count number of things in a series, except for NaN:s. In the case of picking a level, it will count how many values each index holds.
-so if you have an index [1,2,3] for values [a,b,c], it will return :
+This means that series will count number of things in a series, except for NaN:s. 
+
+If the series have multindex (several indexes), you have to pick a level.
+A level is a thing used when you have multiple indexes. Say you have two indexes for each entry , 
+then level 0 is the first index and level 1 is the second index. Given a multiindex series, count will count
+how many values each value in the chosen index holds.
+If you have an index [1,2,3] for values [a,b,c], it will return :
 1    1
 2    1
 3    1
 
-And if the index for some reason is [1,1,2,3] for [a,b,c,d] it will return:
+If the index for some reason is [1,1,2,3] for [a,b,c,d] it will return:
 1    2
 2    1
-3    1
+3    1 
 
-And finally if one of the values is NaN, index [1,1,2,3] for values [a,b,c,NaN], the NaN isn't counted:
+Finally if one of the values is NaN, index [1,1,2,3] for values [a,b,c,NaN], the NaN isn't counted:
 
 1    2
 2    1
@@ -39,57 +44,24 @@ And finally if one of the values is NaN, index [1,1,2,3] for values [a,b,c,NaN],
 
 ##############################################
 Analysis with interface based approach:
-The parameters the function takes is a series and maybe a level. A level is a thing used when you have multiple indexes. Say you have
-two indexes for each entry for instance, then level 0 is the first index and level 1 is the second index.
+The parameters the function takes is a series and maybe a level. 
 
 So the input domain can be: 
 "A series and no level" 
 "A series with a level"
 
-So, the thing it returns is the number of values, it is similar to length in that way, but it will ignore NaN:s.
 
-A note is that you get a warning when you add the levels parameter becaues it will be removed in a future version. In the futer you will have to perform a group by 
-before you do the count, like this:
+A note is that you get a warning when you add the levels parameter becaues it will be removed in a future version. 
+In the futer you will have to perform a group by before you do the count, like this:
 s.groupby(level=1).count()
 
-instead of
+instead of:
 pandas.Series.count(s,1)
 
 This is a good choice I think.
 
 
 '''
-
-
-def all_true(arr):
-    '''Returns True if all items in array is True.
-        Otherwise return False'''
-    state = True
-    for item in arr:
-        if item == False:
-            return False
-    return True
-
-def all_true_index(arr):
-    #need to fix this one to be more general
-    '''Returns True if all items in a series with index all is True.
-        Otherwise return False
-
-        input will be in the form:
-        1    True
-        2    True
-        3    True
-        dtype: bool
-
-        This will only work if the index i is int
-        '''
-
-    state = True
-    for i in range(1,len(arr)):
-        #print("arr0: " + str(arr[0]))
-        if arr[i] == False:
-            return False
-    return True
 
 
 
@@ -106,17 +78,11 @@ class TestSeriesCount(unittest.TestCase):
         self.sequence6 = [NaN]*500 + [6,7]
         self.sequence7 = [0]*1000000 + [1]
 
-        self.li = [1, 1, 1]
-        
 
-        self.arrays = [
+        self.sequence8 = pd.Series([1, 2, 3],index=[
             np.array([1,2,3]),
-            np.array([15,16,17]),
-        ]
-
-
-
-
+            np.array([15,16,16]),
+        ])
     
     def test_series_count_blackbox(self):
         "A series and no level" 
@@ -142,20 +108,20 @@ class TestSeriesCount(unittest.TestCase):
         counted_sequence7 = pd.Series.count(pd.Series(self.sequence7))
         self.assertEqual(counted_sequence7, 1000001)
         
-    def test_series_count_level_blackbox(self):
-        #need to clean this and get i more understandable
+    def test_series_count_multiindex(self):
+
         "A series with a level"
-        #to compare with
-        index_array =  np.array([1,2,3])
-        compare = pd.Series(self.li,index=index_array)
+        # should count [1,1,1] becaus we have three different indexes
+        counted_sequence8  = pd.Series.count(self.sequence8,0).values.tolist()
+        self.assertEqual(counted_sequence8, [1,1,1])
 
-        counted_level = pd.Series(self.li,index=self.arrays)
+        #this one should count index 16 twice, and give us [1,2]
+        counted_sequence9  = pd.Series.count(self.sequence8,1).values.tolist()
+        self.assertEqual(counted_sequence9, [1,2])
 
-
-        self.assertTrue(all_true_index((pd.Series.count(counted_level,0) == compare)))
-
-
-
+        #this one should count index 16 twice, and give us [1,2]
+        counted_sequence9  = pd.Series.count(self.sequence8,1).values.tolist()
+        self.assertEqual(counted_sequence9, [1,2])
 
 
 
