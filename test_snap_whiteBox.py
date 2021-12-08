@@ -21,7 +21,14 @@ class TestSnap(unittest.TestCase):
 
     To measure the statement coverage easily, we also copied the snap function (def snap) to this file because then the IDE
     can show the coverage (which is not possible for functions that are located in the library).
-    To check CFG/other fct + checkComplete /etc.
+
+    We also created a second copy of snap (snapStorePath) for the control flow task. In this function, we added some append
+    statements to save the executed path (integers that correspond to the node in the control flow graph).
+    So we can call this function multiple times and it stores a list that contains every executed path.
+    In the end, we can call the checkComplete() function (which we also implemented ourselves). For given prime paths (the
+    primePaths variable has to be set by the user in advance), the checkComplete() function checks which of the prime paths
+    was covered by our test cases and outputs the fullfilled prime paths and the missing prime paths. The prime path test
+    is complete, if the list of missing prime paths is empty i.e. all prime paths are fullfilled.
     """
     def setUp(self):
         self.index1 = pd.DatetimeIndex(["2020-09-23", "2020-09-26", "2020-09-29"])
