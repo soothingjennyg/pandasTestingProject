@@ -3,6 +3,13 @@ import numpy as np
 import unittest
 
 class TestSeriesSub(unittest.TestCase):
+    """
+     Test the Pandas.Series.sub function
+    
+     sub() will subtract the elements of the corresponding indices from the Series it's called on and the Series passed as'other' argument.
+     This tests focuses only on the parameters 'others',and the Series it's called on.
+     The other parameters are not set and tested with their default values.
+    """
     def setUp(self):
         # regular subtraction
         self.series1a = pd.Series([4,1,2,3])
