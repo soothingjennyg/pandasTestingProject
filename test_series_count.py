@@ -109,13 +109,11 @@ class TestSeriesCount(unittest.TestCase):
         self.sequence6 = [NaN]*500 + [6,7]
         self.sequence7 = [0]*1000000 + [1]
 
-        self.li = [1, 1, 1]
-        
 
-        self.arrays = [
+        self.sequence8 = pd.Series([1, 2, 3],index=[
             np.array([1,2,3]),
-            np.array([15,16,17]),
-        ]
+            np.array([15,16,16]),
+        ])
     
     def test_series_count_blackbox(self):
         "A series and no level" 
@@ -141,18 +139,18 @@ class TestSeriesCount(unittest.TestCase):
         counted_sequence7 = pd.Series.count(pd.Series(self.sequence7))
         self.assertEqual(counted_sequence7, 1000001)
         
-    def test_series_count_level_blackbox(self):
-        #need to clean this and get i more understandable
+    def test_series_count_multiindex(self):
+
         "A series with a level"
-        #to compare with
-        index_array =  np.array([1,2,3])
-        compare = pd.Series(self.li,index=index_array)
+        # should count [1,1,1] becaus we have three different indexes
+        counted_sequence8  = pd.Series.count(self.sequence8,0).values.tolist()
+        self.assertEqual(counted_sequence8, [1,1,1])
 
-        counted_level = pd.Series(self.li,index=self.arrays)
+        #this one should count index 16 twice, and give us [1,2]
+        counted_sequence9  = pd.Series.count(self.sequence8,1).values.tolist()
+        
 
-
-        self.assertTrue(all_true_index((pd.Series.count(counted_level,0) == compare)))
-
+        self.assertEqual(counted_sequence9, [1,2])
 
 if __name__ == '__main__':
     unittest.main()
