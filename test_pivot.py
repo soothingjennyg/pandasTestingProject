@@ -1,11 +1,5 @@
 import unittest
 import pandas as pd
-import sys
-if sys.version_info[0] < 3:
-    from StringIO import StringIO
-else:
-    from io import StringIO
-#Return reshaped DataFrame organized by given index / column values.
 
 #Reshape data (produce a “pivot” table) based on column values. Uses unique values from specified index / columns
 # to form axes of the resulting DataFrame. This function does not support data aggregation, multiple values will
@@ -33,12 +27,8 @@ The return will be a pivoted DataFrame.
 
 class test_pivot(unittest.TestCase):
     def setUp(self):
-        self.seriesArray = [1, 2, 3, 4, 5]
         self.nameArray = ["Alex", "Bob", "Henry", "Charles", "David"]
         self.emptyArray = []
-        self.emptyString = ""
-        self.testNone = None
-        self.testNAN = "NaN"
         self.emptyDataFrame = pd.DataFrame(self.emptyArray)
         self.nameArrayDataFrame = pd.DataFrame({'Name': self.nameArray})
         self.df = pd.DataFrame({'foo': ['one', 'one', 'one', 'two', 'two', 'two'],
@@ -64,7 +54,6 @@ class test_pivot(unittest.TestCase):
         testOne = self.df.pivot(index='foo', columns='bar', values='baz')
         testTwo = self.df.pivot(index='foo', columns='bar', values='zoo')
 
-        #self.assertTrue(self.t2.to_string(index=False) == p.to_string())
         self.assertTrue(testOne.equals(self.pivotDataTestOne))
         self.assertTrue(testTwo.equals(self.pivotDataTestTwo))
 

@@ -36,7 +36,6 @@ class test_melt(unittest.TestCase):
     def setUp(self):
         self.emptyArray = []
         self.emptyDataFrame = pd.DataFrame(self.emptyArray)
-        self.emptyDataFrame2 = pd.DataFrame()
 
         self.nameArray = ["Alex", "Bob", "Henry", "Charles", "David"]
         self.nameArrayDataFrame = pd.DataFrame({'Name': self.nameArray})

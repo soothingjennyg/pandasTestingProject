@@ -16,7 +16,6 @@ are excluded.  *args and **kwargs are arguments and keywords for use with NumPy.
 """
 
 
-#Index.argmin(axis=None, skipna=True, *args, **kwargs)
 class test_argmin(unittest.TestCase):
 
     def setUp(self):
