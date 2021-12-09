@@ -10,10 +10,10 @@ class Mytest(unittest.TestCase):
         self.df = pd.DataFrame([[0, 2, 3], [0, 4, 1], [10, 20, 30]],
                   index=[4, 5, 6], columns=['A', 'B', 'C'])
 
-        self.df.at[4, 'B']=12
+        self.df.at[4, 'C']=13
     def test_at(self):
        self.assertEqual(self.df.at[4, 'B'],2)
-       self.assertEqual(self.df.at[4, 'B'], 12)
+       self.assertEqual(self.df.at[4, 'C'], 13)
 
 if __name__ == '__main__':
     unittest.main()
