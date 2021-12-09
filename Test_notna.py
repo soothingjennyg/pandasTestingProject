@@ -17,7 +17,7 @@ class Mytest(unittest.TestCase):
         self.assertEqual(pd.notna(self.str),True)
         self.assertEqual(pd.notna(self.testNone),False)
         self.assertEqual(pd.notna(self.testNan),True)
-        self.assertEqual(pd.notna(self.testarray[2]), False)
+        self.assertEqual(pd.notna(self.testarray[2]), True)
         self.assertEqual(pd.notna(self.testarray).all(),(True))
         self.assertEqual(pd.notna(self.test1).all(), (False))
 
