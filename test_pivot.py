@@ -4,8 +4,6 @@ import unittest
 import pandas as pd
 
 from typing import (
-    TYPE_CHECKING,
-    Callable,
     Hashable,
     Sequence,
     cast,
@@ -13,38 +11,21 @@ from typing import (
 
 
 from pandas._typing import (
-    AggFuncType,
-    AggFuncTypeBase,
-    AggFuncTypeDict,
     IndexLabel,
 )
-from pandas.util._decorators import (
-    Appender,
-    Substitution,
-)
 
-from pandas.core.dtypes.cast import maybe_downcast_to_dtype
 from pandas.core.dtypes.common import (
-    is_integer_dtype,
     is_list_like,
-    is_nested_list_like,
-    is_scalar,
-)
-from pandas.core.dtypes.generic import (
-    ABCDataFrame,
-    ABCSeries,
 )
 
 import pandas.core.common as com
-from pandas.core.frame import _shared_docs
-from pandas.core.groupby import Grouper
+
 from pandas.core.indexes.api import (
     Index,
     MultiIndex,
     get_objs_combined_axis,
 )
-from pandas.core.reshape.concat import concat
-from pandas.core.reshape.util import cartesian_product
+
 from pandas.core.series import Series
 
 #if TYPE_CHECKING:
@@ -71,7 +52,6 @@ Values is an optional parameter. This will only be used as the default for these
 
 The return will be a pivoted DataFrame.
 """
-#To test: empty frame
 
 class test_pivot(unittest.TestCase):
     def setUp(self):
@@ -135,15 +115,17 @@ def pivot(
 ) -> DataFrame:
     if columns is None:
         raise TypeError("pivot() missing 1 required argument: 'columns'")
+        #test where columns = none
 
     columns_listlike = com.convert_to_list_like(columns)
 
     if values is None:
         if index is not None:
             cols = com.convert_to_list_like(index)
+            #test three
         else:
             cols = []
-
+            #test five
         append = index is None
         # error: Unsupported operand types for + ("List[Any]" and "ExtensionArray")
         # error: Unsupported left operand type for + ("ExtensionArray")
@@ -153,8 +135,10 @@ def pivot(
     else:
         if index is None:
             index_list = [Series(data.index, name=data.index.name)]
+            #test four and six
         else:
             index_list = [data[idx] for idx in com.convert_to_list_like(index)]
+            #test one and two
 
         data_columns = [data[col] for col in columns_listlike]
         index_list.extend(data_columns)
@@ -162,11 +146,13 @@ def pivot(
 
         if is_list_like(values) and not isinstance(values, tuple):
             # Exclude tuple because it is seen as a single column name
+            #test six
             values = cast(Sequence[Hashable], values)
             indexed = data._constructor(
                 data[values]._values, index=multiindex, columns=values
             )
         else:
             indexed = data._constructor_sliced(data[values]._values, index=multiindex)
+            # test four, one and two
     return indexed.unstack(columns_listlike)
 
