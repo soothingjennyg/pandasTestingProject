@@ -18,7 +18,7 @@ Returns
 
 
 
-So you can specify the level if multiindex. So the cases that I see are:
+You can specify the level if multiindex. So the cases that I see are:
 - simple index, all values uniq or simple index, some or all values same
 - MultiIndex, all values uniq or MultiIndex, some or all values same
 
