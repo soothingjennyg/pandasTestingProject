@@ -57,8 +57,8 @@ def swap_axes(frame, axis1, axis2, copy=True):
 
 
 
-class TestUnique(unittest.TestCase):
-    '''Functions for testing the unique in pandas index'''
+class TestSwapAxes(unittest.TestCase):
+    
 
     def setUp(self):
         #original
@@ -81,7 +81,7 @@ class TestUnique(unittest.TestCase):
 
 
 
-    def test_unique_whitebox(self):
+    def test_swap_axes_whitebox(self):
 
         #This first test gets most of the lines, except for lines 33-35.
         df1_swapped = swap_axes(self.df1,axis1="index", axis2="columns")
