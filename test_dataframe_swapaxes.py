@@ -1,12 +1,11 @@
 import pandas as pd
-import numpy as np
 import unittest
 
 ''' Interchange axes and swap values axes appropriately.
 
-    So what we are testing here is if the swap of columns and rows in a dataframe is correct. Rows become columns and columns become rows.
+    What we are testing here is if the swap of columns and rows in a dataframe is correct. Rows become columns and columns become rows.
 
-    For testcases we are doing four. The empty table, table with one entry, a small symmetric table and a bigger not symmetric table.
+    For testcases we are doing three (empty table doesn't work). Table with one entry, a small symmetric table and a bigger not symmetric table.
 
 '''
 def all_true(arr):
@@ -23,6 +22,8 @@ class TestUnique(unittest.TestCase):
     '''Functions for testing the unique in pandas index'''
 
     def setUp(self):
+
+        #case 1
         #original
         self.df1 = pd.DataFrame({"A":[10, 11, 7, 8, 5],
                    "B":[21, 5, 32, 4, 6],
@@ -38,23 +39,42 @@ class TestUnique(unittest.TestCase):
                                  "A5":[5, 6, 9, 6]},   
                    index =["A", "B", "C", "D"])
 
+        #case 2
         self.df3 = pd.DataFrame({"A":[0]}, 
                         index =["A"])
-        print(self.df3)
 
+
+        #case 3
+        self.df4 = pd.DataFrame({"A":[0,1],
+                                 "B":[2,3]}, 
+                        index =["A1","A2"])
+
+        #swapped
+        self.df5 = pd.DataFrame({"A1":[0,2],
+                                 "A2":[1,3]}, 
+                        index =["A","B"])
 
 
     def test_unique_blackbox(self):
-
+        #case 1
+        #bigger not symmetric table
         df1_swapped = self.df1.swapaxes(axis1="index", axis2="columns")
         # making array that is only True if all equal
         bool_arr = ((df1_swapped == self.df2).eq(True).all())
         self.assertTrue(all_true(bool_arr.values.tolist()))
 
-        
+        #case 2
+        # Table with one entry
         df3_swapped = self.df3.swapaxes(axis1="index", axis2="columns")
         # making array that is only True if all equal
         bool_arr = ((df3_swapped == self.df3).eq(True).all())
+        self.assertTrue(all_true(bool_arr.values.tolist()))
+
+        #case 3
+        # small symmetric table
+        df4_swapped = self.df4.swapaxes(axis1="index", axis2="columns")
+        # making array that is only True if all equal
+        bool_arr = ((df4_swapped == self.df5).eq(True).all())
         self.assertTrue(all_true(bool_arr.values.tolist()))
 
 

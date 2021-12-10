@@ -58,8 +58,6 @@ s.groupby(level=1).count()
 instead of:
 pandas.Series.count(s,1)
 
-This is a good choice I think.
-
 
 '''
 

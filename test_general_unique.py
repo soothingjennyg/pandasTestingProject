@@ -4,6 +4,12 @@ import unittest
 import numpy as np
 
 '''
+The general.unique take a array-like object and return the unique values in it. To test this we simply pass in different lists where some 
+of the values are not unique, and check if general.unique returns the right values. 
+
+
+Fromm documentation:
+
 Parameters: values1d: array-like
 
 Returns:
@@ -12,7 +18,9 @@ The return can be:
     Index : when the input is an Index
     Categorical : when the input is a Categorical dtype
     ndarray : when the input is a Series/ndarray
-    Return numpy.ndarray or ExtensionArray.'''
+    Return numpy.ndarray or ExtensionArray.
+    
+    '''
 
 
 
