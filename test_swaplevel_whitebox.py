@@ -3,6 +3,17 @@ import unittest
 import numpy as np
 import coverage
 from pandas.core.indexes.multi import (MultiIndex)
+""" Here I am testing whitebox the swaplevel function and the goal is to get 100% statement coverage.
+soi looked at the source code and tried to get all lines executed.but here i get 98% statement covered.
+the missing line is only one i.e 12
+we get
+      Name                         Stmts   Miss  Cover   Missing
+      ----------------------------------------------------------
+      test_swaplevel_whitebox.py      57      1    98%   12
+      ----------------------------------------------------------
+      TOTAL                           57      1    98%
+      """
+
 
 def all_true(arr):
     '''Returns True if all items in array is True.
