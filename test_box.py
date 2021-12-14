@@ -32,7 +32,7 @@ class Mytest(unittest.TestCase):
 
 
 def _box_as_indexlike(
-    dt_array: ArrayLike, utc: bool | None = None, name: Hashable = None
+    dt_array: ArrayLike, utc: bool, name: Hashable = None
 ) -> Index:
     """
     Properly boxes the ndarray of datetimes to DatetimeIndex
