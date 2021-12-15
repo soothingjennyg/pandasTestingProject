@@ -5,7 +5,8 @@ import unittest
 
     What we are testing here is if the swap of columns and rows in a dataframe is correct. Rows become columns and columns become rows.
 
-    For testcases we are doing three (empty table doesn't work). Table with one entry, a small symmetric table and a bigger not symmetric table.
+    For testcases we are doing three (empty table doesn't work). The testcases are:
+    Table with one entry, a small symmetric table and a bigger not symmetric table.
 
 '''
 def all_true(arr):

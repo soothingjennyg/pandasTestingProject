@@ -8,7 +8,7 @@ The general.unique take a array-like object and return the unique values in it. 
 of the values are not unique, and check if general.unique returns the right values. 
 
 
-Fromm documentation:
+From documentation:
 
 Parameters: values1d: array-like
 
@@ -49,12 +49,15 @@ class TestUnique(unittest.TestCase):
         #basic uniqueness test given documentation
         sequence1_unique = pd.unique(self.sequence1) 
         
-
+        # unique list, should stay the same
         self.assertTrue(all_true(sequence1_unique == [1, 2, 3]))
         sequence2_unique = pd.unique(self.sequence2) 
+        # not unique list, should become unique
         self.assertTrue(all_true(sequence2_unique == [1, 2, 3]))
         sequence3_unique = pd.unique(self.sequence3) 
+        # empty list, should stay empty
         self.assertTrue(all_true(sequence3_unique == []))
+        # bigger list with alot of 0 and one 1. Should become just the 0 and the 1.
         sequence3_unique = pd.unique(self.sequence4) 
         self.assertTrue(all_true(sequence3_unique == [0,1]))
 

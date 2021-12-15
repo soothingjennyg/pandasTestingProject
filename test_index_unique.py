@@ -4,7 +4,7 @@ import numpy as np
 '''
 Index.unique will take an index (a list of values, used as index) and return the the unique values, in order of apperance.
 
-Fromm documentation:
+From documentation:
 
 Parameters
     levelint or hashable, optional
@@ -15,11 +15,11 @@ Returns
 
 
 
-You can specify the level if multiindex. So the cases that I see are:
+The level can be specified if multiindex. So the cases that I see are:
 - simple index, all values uniq or simple index, some or all values same
 - MultiIndex, all values uniq or MultiIndex, some or all values same
 
-I will do empty, a small and a large index for these cases.
+Testing empty, a small and a large index for these cases.
 
 '''
 
