@@ -1,9 +1,6 @@
 import pandas as pd
 import unittest
 import numpy as np
-
-
-
 '''
 Index.unique will take an index (a list of values, used as index) and return the the unique values, in order of apperance.
 
